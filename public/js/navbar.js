@@ -4,7 +4,7 @@ const body_before = `
             <div class="menu top-menu">
                 <ul>
                     <li><a href="lore.html">a1a-ecosyetm</a></li>
-                    <li><a href="tool.html">Tools</a></li>
+                    <li><a href="tools.html">Tools</a></li>
                     <li>
                         <img src="aia-eco.jpg" class="logo" />
                     </li>
