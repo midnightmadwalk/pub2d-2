@@ -23,13 +23,15 @@
             }
 
             .tg {
-                background: url("tg.png") no-repeat;
+                background: url("https://github.com/midnightmadwalk/icons/blob/main/tg.png")
+                    no-repeat;
                 background-size: cover;
                 background-position: center;
                 background-color: #33abdf;
             }
             .x {
-                background: url("x.png") no-repeat;
+                background: url("https://github.com/midnightmadwalk/icons/blob/main/x.png")
+                    no-repeat;
                 background-size: cover;
                 background-position: center;
             }
@@ -74,7 +76,9 @@
                     rotate(calc(-1 * var(--angle)));
                 text-decoration: none;
                 transition: background-color 0.3s ease;
+                overflow: hidden;
             }
+
             .contact_menu-item img {
                 width: 100%;
                 height: 100%;
@@ -85,6 +89,20 @@
             .contact_menu-item:hover {
                 background-color: #27ae60;
             }
+
+            .contact_menu-item:hover::after {
+                content: attr(data-title);
+                position: absolute;
+                top: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.8);
+                color: white;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                white-space: nowrap;
+            }
         </style>
     </head>
     <body>
@@ -93,11 +111,11 @@
                 <!-- Central Buttons -->
                 <div class="central-buttons">
                     <div
-                        class="central-button tg"
+                        class="central-button x"
                         onclick="togglecontact_menu('left')"
                     ></div>
                     <div
-                        class="central-button x"
+                        class="central-button tg"
                         onclick="togglecontact_menu('right')"
                     ></div>
                 </div>
@@ -106,10 +124,10 @@
                 <div class="contact_menu left" id="leftcontact_menu">
                     <a
                         href="https://x.com/DaiHardPLS"
-                        class="contact_menu-item"
-                        style="--offset: 0deg"
-                        title="DaiHardPLS"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="DaiHardPLS"
+                        style="--offset: 0deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/DaiHardPLS.png?raw=true"
@@ -118,10 +136,10 @@
                     </a>
                     <a
                         href="https://x.com/plsXmas"
-                        class="contact_menu-item"
-                        style="--offset: 30deg"
-                        title="plsXmas"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="plsXmas"
+                        style="--offset: 30deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/plsXmas.png?raw=true"
@@ -130,10 +148,10 @@
                     </a>
                     <a
                         href="https://x.com/MiniEthLaB"
-                        class="contact_menu-item"
-                        style="--offset: 60deg"
-                        title="MiniEthLaB"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="MiniEthLaB"
+                        style="--offset: 60deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/MiniEthLab.png?raw=true"
@@ -142,10 +160,10 @@
                     </a>
                     <a
                         href="https://x.com/SunnyDetect420"
-                        class="contact_menu-item"
-                        style="--offset: 90deg"
-                        title="SunnyDetect420"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="SunnyDetect420"
+                        style="--offset: 90deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/SunnyDetect420.png?raw=true"
@@ -154,10 +172,10 @@
                     </a>
                     <a
                         href="https://x.com/REWARDrEco"
-                        class="contact_menu-item"
-                        style="--offset: 120deg"
-                        title="REWARDrEco"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="REWARDrEco"
+                        style="--offset: 120deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/REWARDrPulseChain.png?raw=true"
@@ -166,10 +184,10 @@
                     </a>
                     <a
                         href="https://www.telegram.dog/sunnyspubv2"
-                        class="contact_menu-item"
-                        style="--offset: 150deg"
-                        title="sunnyspubv2"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="sunnyspubv2"
+                        style="--offset: 150deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/sunnyspubv2.png?raw=true"
@@ -182,10 +200,10 @@
                 <div class="contact_menu right" id="rightcontact_menu">
                     <a
                         href="https://www.telegram.dog/tokena1a"
-                        class="contact_menu-item"
-                        style="--offset: 0deg"
-                        title="tokena1a"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="tokena1a"
+                        style="--offset: 0deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/tokena1a.png?raw=true"
@@ -194,10 +212,10 @@
                     </a>
                     <a
                         href="https://www.telegram.dog/MiniEthLab"
-                        class="contact_menu-item"
-                        style="--offset: 30deg"
-                        title="MiniEthLab"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="MiniEthLab"
+                        style="--offset: 30deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/MiniEthLab.png?raw=true"
@@ -206,10 +224,10 @@
                     </a>
                     <a
                         href="https://www.telegram.dog/REWARDrPulseChain"
-                        class="contact_menu-item"
-                        style="--offset: 60deg"
-                        title="REWARDrPulseChain"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="REWARDrPulseChain"
+                        style="--offset: 60deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/REWARDrPulseChain.png?raw=true"
@@ -218,10 +236,10 @@
                     </a>
                     <a
                         href="https://www.telegram.dog/plsXmas"
-                        class="contact_menu-item"
-                        style="--offset: 90deg"
-                        title="plsXmas"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="plsXmas"
+                        style="--offset: 90deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/plsXmas.png?raw=true"
@@ -230,10 +248,10 @@
                     </a>
                     <a
                         href="https://www.telegram.dog/DaiHardPLS"
-                        class="contact_menu-item"
-                        style="--offset: 120deg"
-                        title="DaiHardPLS"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="DaiHardPLS"
+                        style="--offset: 120deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/DaiHardPLS.png?raw=true"
@@ -242,10 +260,10 @@
                     </a>
                     <a
                         href="#"
-                        class="contact_menu-item"
-                        style="--offset: 150deg"
-                        title="Default Link"
                         target="_blank"
+                        class="contact_menu-item"
+                        data-title="Default Link"
+                        style="--offset: 150deg"
                     >
                         <img
                             src="https://github.com/midnightmadwalk/icons/blob/main/default.png?raw=true"
