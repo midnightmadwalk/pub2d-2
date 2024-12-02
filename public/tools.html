@@ -1,32 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tools</title>
-    <link rel="stylesheet" href="css/custom.css" />
-	<style>
-		body {
-			background-color: black;
-			color: whitesmoke;
-		}
-		section {
-            background: black;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-	</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotating Cube with Menu</title>
+  <link rel="stylesheet" href="css/custom.css">
+  <style>
+    .tools_section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: url('hand.png') no-repeat center center;
+      background-size: 59%;
+      perspective: 800px;
+      background-color: black;
+      position: relative;
+      background-position: center right;
+    }
+
+    .tools_menu {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-left: 300px; /* Added margin to the left */
+    }
+
+    .tools_menu a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+      text-align: center;
+    }
+
+    .tools_menu a:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .cube {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      transform-style: preserve-3d;
+      animation: rotateCube 20s infinite ease-in-out;
+      visibility: hidden;
+    }
+
+    .face {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .front  { transform: translateZ(75px); }
+    .back   { transform: rotateY(180deg) translateZ(75px); }
+    .left   { transform: rotateY(-90deg) translateZ(75px); }
+    .right  { transform: rotateY(90deg) translateZ(75px); }
+    .top    { transform: rotateX(90deg) translateZ(75px); }
+    .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+    @keyframes rotateCube {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+      10% {
+        transform: rotateX(50deg) rotateY(150deg) rotateZ(20deg);
+      }
+      20% {
+        transform: rotateX(130deg) rotateY(240deg) rotateZ(60deg);
+      }
+      30% {
+        transform: rotateX(180deg) rotateY(90deg) rotateZ(45deg);
+      }
+      40% {
+        transform: rotateX(300deg) rotateY(110deg) rotateZ(80deg);
+      }
+      50% {
+        transform: rotateX(100deg) rotateY(250deg) rotateZ(120deg);
+      }
+      60% {
+        transform: rotateX(240deg) rotateY(40deg) rotateZ(50deg);
+      }
+      70% {
+        transform: rotateX(70deg) rotateY(180deg) rotateZ(90deg);
+      }
+      80% {
+        transform: rotateX(20deg) rotateY(270deg) rotateZ(150deg);
+      }
+      90% {
+        transform: rotateX(180deg) rotateY(350deg) rotateZ(110deg);
+      }
+      100% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(360deg);
+      }
+    }
+  </style>
 </head>
 <body>
-	<section>
-		<h1>Under Construction</h1>
-	</section>
-	<script src="js/navbar.js"></script>
+
+  <section class="tools_section">
+
+    
+    <!-- Menu -->
+    <nav class="tools_menu">
+      <a href="#liq-check">Liquidity Checker</a>
+      <a href="#liq-web">Liquidity WebView</a>
+      <a href="#reward-calc">RewardR Reward Calculator</a>
+    </nav>
+    
+    <!-- Rotating Cube -->
+    <div class="cube">
+      <div class="face front" style="background-image: url('hard.jpg');"></div>
+      <div class="face back" style="background-image: url('tree.jpg');"></div>
+      <div class="face left" style="background-image: url('A1A-B2B.png');"></div>
+      <div class="face right" style="background-image: url('hand.jpeg');"></div>
+      <div class="face top" style="background-image: url('meth.webp');"></div>
+      <div class="face bottom" style="background-image: url('sun.jpg');"></div>
+    </div>
+    
+  </section>
+  <script>
+    const images = document.querySelectorAll('.face');
+    let loadedImages = 0;
+
+    images.forEach(image => {
+      const img = new Image();
+      img.src = image.style.backgroundImage.slice(5, -2);
+      img.onload = () => {
+        loadedImages++;
+        if (loadedImages === images.length) {
+          document.querySelector('.cube').style.visibility = 'visible';
+        }
+      };
+    });
+  </script>
+  <script src="js/navbar.js"></script>
+
 </body>
 </html>
