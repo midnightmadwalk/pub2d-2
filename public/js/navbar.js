@@ -3,8 +3,8 @@ const body_before = `
         <section class="film-lines">
             <div class="menu top-menu">
                 <ul>
-                    <li><a href="/">a1a-ecosyetm</a></li>
-                    <li><a href="lore.html">About Us</a></li>
+                    <li><a href="lore.html">a1a-ecosyetm</a></li>
+                    <li><a href="tool.html">Tools</a></li>
                     <li>
                         <img src="aia-eco.jpg" class="logo" />
                     </li>
