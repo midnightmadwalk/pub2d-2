@@ -3,22 +3,21 @@ const body_before = `
         <section class="film-lines">
             <div class="menu top-menu">
                 <ul>
-                    <li><a href="lore.html">a1a-ecosyetm</a></li>
-                    <li><a href="tools.html">Tools</a></li>
+                    <li><a href="lore.html">A1A ECOSYSTEM INDEX</a></li>
+                    <li><a href="tools.html">TOOLS</a></li>
                     <li>
                         <img src="aia-eco.jpg" class="logo" />
                     </li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="stats.html">Statics</a></li>
+                    <li><a href="contact.html">SOCIALS</a></li>
+                    <li><a href="stats.html">STATS</a></li>
                 </ul>
             </div>`;
 const body_after = `<div class="menu bottom-menu">
                 <ul id="mob-menu">
-                    <li><a href="lore.html">a1a-ecosyetm</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Tools</a></li>
-                    <li><a href="stats.html">Statics</a></li>
+                    <li><a href="lore.html">>A1A ECOSYSTEM INDEX</a></li>
+                    <li><a href="#">TOOLS</a></li>
+                    <li><a href="#">SOCIALS</a></li>
+                    <li><a href="stats.html">STATS</a></li>
                 </ul>
             </div>
         </section>`;
