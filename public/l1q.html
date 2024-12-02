@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L1quidity</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    #loadingBar {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #loadingProgress {
+      width: 100%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    body.dark-mode th {
+      background-color: #333333;
+    }
+
+    body.dark-mode td {
+      border-color: #444444;
+    }
+
+    body.dark-mode table {
+      border-color: #444444;
+    }
+
+    .toggle-switch {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+    }
+    
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #ffffff;
+  padding: 0 20px;
+}
+
+::selection {
+  color: #fff;
+  background: #664AFF;
+}
+
+.wrapper {
+  max-width: 450px;
+  margin: 150px auto;
+}
+
+.wrapper .search-input {
+  background: #fff;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
+}
+
+.search-input input {
+  height: 55px;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  padding: 0 60px 0 20px;
+  font-size: 18px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-input.active input {
+  border-radius: 5px 5px 0 0;
+}
+
+
+
+.search-input .icon {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 55px;
+  width: 55px;
+  text-align: center;
+  line-height: 55px;
+  font-size: 20px;
+  color: #644bff;
+  cursor: pointer;
+}
+
+.styleResault {
+  display: none;
+  transition: all 1s;
+  font-size: large;
+  margin-top: 50px;
+  padding: 20px;
+  border-radius: 8px;
+  font-weight: bolder;
+  text-align: center;
+
+}
+.styleResault:hover {
+    transform: scale(110%);
+}
+
+/* Custom radio button styles */
+.radio-container {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.radio-container input:checked ~ .radio-checkmark {
+  background-color: #664bff;
+}
+
+.radio-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.radio-container input:checked ~ .radio-checkmark:after {
+  display: block;
+}
+
+.radio-container .radio-checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+</style>
+</head>
+<body class="dark-mode"> <!-- Added dark-mode class by default -->
+  <div class="toggle-switch">
+    <label>
+      <input type="checkbox" id="nightModeToggle" onclick="toggleNightMode()" checked> Night Mode
+    </label>
+  </div>
+
+
+
+  <div class="wrapper">
+      <h6>may overload sometime</h6>
+
+   <h1>beta version </h1>
+  <h3>Instructions - </h3>
+    <br>
+  <h4 style="color: green;">1. Paste contract and let it run till it searches all the addresses</h4>
+  <h4 style="color: green;">2. Zoom out for a good experience and thanks helios.</h4>
+<br>
+    <br>
+    <br>
+        <div class="search-input">
+
+      <a href="#" target="_blank" hidden></a>
+  <input type="text" id="contractAddressInput" placeholder="Type to search..." value="0x697fc467720B2a8e1b2F7F665d0e3f28793E65e8"> 
+
+      <div class="autocom-box">
+        <!-- here list are inserted from javascript -->
+      </div>
+
+      <div class="icon" onclick="fetchTokenData()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+          viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+        </svg>
+      </div>
+
+    </div>
+<br>
+    <br>
+    <br>
+        <label class="radio-container">Show All
+          <input type="radio" name="filterType" value="all" id="all" onclick="filterResults()">
+          <span class="radio-checkmark"></span>
+        </label>
+
+        <label class="radio-container">Show Contracts
+          <input type="radio" name="filterType" value="contract" id="contract" onclick="filterResults()">
+          <span class="radio-checkmark"></span>
+        </label>
+
+        <label class="radio-container">Show Non-Contracts
+          <input type="radio" name="filterType" value="notContract" id="notContract" onclick="filterResults()">
+          <span class="radio-checkmark"></span>
+        </label>
+
+        <label class="radio-container">Show LP
+          <input type="radio" name="filterType" value="showLP" id="showLP" checked onclick="filterResults()">
+          <span class="radio-checkmark"></span>
+        </label>
+  </div>
+
+
+  
+  
+
+  
+  <p id="lpCountDisplay"></p>
+
+  <div id="loadingBar">
+    <p id="progressText">Loading...</p>
+    <progress id="loadingProgress" max="100"></progress>
+  </div>
+
+  <div id="counters"></div>
+  <div id="tokenDataOutput">
+    <table class="hidden">
+      <thead>
+        <tr>
+          <th>Address</th>
+          <th>Value</th>
+          <th>Contract Status</th>
+          <th>Name</th>
+          <th>LP Data</th>
+          <th>Chart</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const apiUrl = 'https://rpc.pulsechain.com';
+    const pageSize = 50; // <-- this mf is slow
+
+    function fetchTokenData() {
+      // Clear previous data
+      document.querySelector('#tokenDataOutput table tbody').innerHTML = '';
+      document.querySelector('#counters').innerHTML = '';
+
+      const contractAddressInput = document.getElementById('contractAddressInput');
+      const contractAddress = contractAddressInput.value;
+
+      // Show loading bar
+      const loadingBar = document.getElementById('loadingBar');
+      loadingBar.style.display = 'block';
+
+      setTimeout(() => {
+        fetch(`https://api.scan.pulsechain.com/api/v2/tokens/${contractAddress}/counters`)
+          .then(response => response.json())
+          .then(data => {
+            const countersOutput = document.getElementById('counters');
+            countersOutput.innerHTML = `<h2>Counters:</h2><p><span>Holders: ${data['token_holders_count']}</span></p><p>Transfers: <span>${data['transfers_count']}</span></p>`;
+
+            const tokenHoldersCount = data.token_holders_count;
+            const totalPages = Math.ceil(tokenHoldersCount / pageSize);
+            let currentPage = 1;
+            const table = document.querySelector('#tokenDataOutput table');
+            table.classList.remove('hidden');
+            table.querySelector('tbody').innerHTML = '';
+
+            function fetchNextPage() {
+              fetch(`https://api.scan.pulsechain.com/api?module=token&action=getTokenHolders&contractaddress=${contractAddress}&page=${currentPage}&offset=${pageSize}`)
+                .then(response => response.json())
+                .then(tokenHoldersData => {
+                  tokenHoldersData.result.forEach((entry, index) => {
+                    const tr = document.createElement('tr');
+
+                    let addressCell = document.createElement('td');
+                    addressCell.innerHTML = entry.address;
+                    tr.appendChild(addressCell);
+
+                    let valueCell = document.createElement('td');
+                    valueCell.innerHTML = entry.value;
+                    tr.appendChild(valueCell);
+
+                    let contractCell = document.createElement('td');
+                    tr.appendChild(contractCell);
+
+                    let nameCell = document.createElement('td');
+                    tr.appendChild(nameCell);
+
+                    let lpDataCell = document.createElement('td');
+                    tr.appendChild(lpDataCell);
+
+                    let tbody = table.querySelector('tbody');
+                    tbody.appendChild(tr);
+
+                    checkIfContract(entry.address, contractCell);
+                    fetchName(entry.address, nameCell);
+                    displayResults(entry.address, lpDataCell);
+                  });
+
+                  currentPage++;
+
+                  const progressText = document.getElementById('progressText');
+                  const loadingProgress = document.getElementById('loadingProgress');
+                  const progress = (currentPage / totalPages) * 100;
+
+                  progressText.textContent = `Scanning addresses: ${currentPage * pageSize} of ${tokenHoldersCount}`;
+                  loadingProgress.value = progress;
+
+                  if (currentPage <= totalPages) {
+                    fetchNextPage();
+                  } else {
+                    loadingBar.style.display = 'none';
+                  }
+                })
+                .catch(error => {
+                  console.error('Error fetching token holders data:', error);
+                  loadingBar.style.display = 'none';
+                });
+            }
+
+            fetchNextPage();
+          })
+          .catch(error => {
+            console.error('Error fetching token data:', error);
+            loadingBar.style.display = 'none';
+          });
+      }, 50);
+    }
+
+    function checkIfContract(address, contractCell) {
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          id: 1,
+          method: 'eth_getCode',
+          params: [address, 'latest'],
+        }),
+      })
+        .then(response => response.json())
+        .then(data => {
+          const isContract = data.result != '0x';
+          let filter_contracts = document.querySelector('#contract');
+          let filter_lp = document.querySelector('#showLP');
+          if (!isContract && (filter_contracts.checked || filter_lp.checked)) contractCell.parentElement.classList.add('hidden');
+          contractCell.textContent = isContract ? 'Contract' : 'Not a Contract';
+        })
+        .catch(error => {
+          console.error('Error checking if address is a contract:', error);
+        });
+    }
+
+    function fetchName(address, nameCell) {
+      fetch(`https://api.scan.pulsechain.com/api/v2/search?q=${address}`)
+        .then(response => response.json())
+        .then(data => {
+          const name = data.items[0]?.name || 'N/A';
+          let filter_lp = document.querySelector('#showLP');
+          if ((name.indexOf(' LP') == -1 || name == 'N/A') && filter_lp.checked) nameCell.parentElement.classList.add('hidden');
+          nameCell.textContent = name;
+        })
+        .catch(error => {
+          console.error('Error fetching name:', error);
+          nameCell.textContent = 'N/A';
+        });
+    }
+
+    async function getTokenInfo(contractAddress) {
+      if (contractAddress == '0x') return false;
+      try {
+        const response = await fetch(`https://api.scan.pulsechain.com/api/v2/tokens/${contractAddress}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const result = await response.json();
+        return result.symbol || "Symbol not available";
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    function hexToEthAddress(hex) {
+      return `0x${hex.substring(26)}`;
+    }
+
+    async function makeEthCall(address, data) {
+      try {
+        const response = await fetch('https://rpc.pulsechain.com', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            jsonrpc: '2.0',
+            method: 'eth_call',
+            params: [{
+              to: address,
+              data: data,
+            }, 'latest'],
+            id: 1,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result.result;
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    async function displayResults(address, lpDataCell) {
+      try {
+        const result1Hex = await makeEthCall(address, '0x0dfe1681');
+        if (result1Hex == undefined) return false;
+        const result1Eth = hexToEthAddress(result1Hex);
+
+        const symbol1 = await getTokenInfo(result1Eth);
+        if (!symbol1) return false;
+
+        const result2Hex = await makeEthCall(address, '0xd21220a7');
+        if (result2Hex == undefined) return false;
+        const result2Eth = hexToEthAddress(result2Hex);
+
+        const symbol2 = await getTokenInfo(result2Eth);
+        if (!symbol2) return false;
+
+        const lpData = `${symbol1}/${symbol2}`;
+        lpDataCell.textContent = lpData;
+
+        const chartUrl = `https://dexscreener.com/pulsechain/${address}`;
+        addChartColumn(lpDataCell.parentElement, chartUrl);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    function addChartColumn(row, chartUrl) {
+      const chartCell = document.createElement('td');
+      const chartLink = document.createElement('a');
+      chartLink.href = chartUrl;
+      chartLink.target = '_blank';
+      chartLink.textContent = 'dexS';
+      chartCell.appendChild(chartLink);
+      row.appendChild(chartCell);
+    }
+
+    function filterResults() {
+      const filterType = document.querySelector('input[name="filterType"]:checked').value;
+      const rows = document.querySelectorAll('table tbody tr');
+      let lpCount = 0;
+
+      rows.forEach(row => {
+        row.classList.remove('hidden');
+        const contractCell = row.cells[2];
+        const nameCell = row.cells[3];
+        const lpDataCell = row.cells[4];
+
+        switch (filterType) {
+          case 'all':
+            row.style.display = '';
+            break;
+          case 'contract':
+            if (contractCell.textContent != 'Contract') row.classList.add('hidden');
+            break;
+          case 'notContract':
+            if (contractCell.textContent == 'Contract') row.classList.add('hidden');
+            break;
+          case 'showLP':
+            if (nameCell.textContent.toLowerCase().includes(' lp')) {
+              row.classList.remove('hidden');
+              lpCount++;
+            } else {
+              row.classList.add('hidden');
+            }
+            break;
+        }
+      });
+
+      if (filterType === 'showLP') {
+        const lpCountDisplay = document.getElementById('lpCountDisplay');
+        lpCountDisplay.textContent = `Number of PulseX LP rows: ${lpCount}`;
+      }
+    }
+
+    function toggleNightMode() {
+      const body = document.body;
+      body.classList.toggle('dark-mode');
+      const nightModeToggle = document.getElementById('nightModeToggle');
+      nightModeToggle.checked = body.classList.contains('dark-mode');
+    }
+  </script>
+      <script>
+        function insertAddress() {
+            const address = "0x697fc467720B2a8e1b2F7F665d0e3f28793E65e8";
+            document.getElementById('contractAddressInput').value = address; // Insert address into the search bar
+        }
+    </script>
+</body>
+</html>
