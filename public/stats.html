@@ -5,23 +5,22 @@
   <meta charset="UTF-8">
   <title>"Roxineo" Fire</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="css/custom.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,700,900" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
   <style>
-    /* Styles for counter */
     .counter-container-main {
-      position: fixed;
-      margin-top: 1rem;
-      z-index: 10000;
+      margin-top: 1rem !important;
+      font-size: 10px;
+      position: absolute;
+      z-index: 100;
       left: 50%;
       transform: translateX(-50%);
     }
     .counter-container {
       text-align: center;
       margin: 10px;
-      /* Reduced space between the counters */
     }
 
     .counter-label {
@@ -36,38 +35,20 @@
       font-weight: 700;
     }
 
-    /* Additional Fire Page Styles */
-    @import url("https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i");
-
-    html,
-    body {
-      height: 100%;
+    .stats_section {
       font-size: 10px;
       color: white;
       font-family: "Karla", sans-serif;
       background: black;
     }
 
-    /* Reduce space between text and fire animation */
     #fireCanvas {
       position: relative;
-      /* Moves the fire up */
-    }
-
-
-    * {
-      padding: 0;
-      margin: 0;
-    }
-
-    body {
-      background-color: black;
     }
 
     table {
       margin-top: 5px;
       border-collapse: collapse;
-      /* border: 1px solid #000;  */
     }
 
     td {
@@ -105,26 +86,26 @@
 </head>
 
 <body>
+  <section class="stats_section">
 
-  <!-- Counter Section -->
-  <div class="counter-container-main">
-    <div class="counter-container">
-      <div class="counter-label">Total Tokens in Ecosystem</div>
-      <p class="statistic">500</p>
+    <div class="counter-container-main">
+      <div class="counter-container">
+        <div class="counter-label">Total Tokens in Ecosystem</div>
+        <p class="statistic">500</p>
+      </div>
+      <div class="counter-container">
+        <div class="counter-label">Total Transactions Across Ecosystem</div>
+        <p class="statistic">1000</p>
+      </div>
+      <div class="counter-container">
+        <div class="counter-label">Total Burned pDAI 🔥</div>
+        <p class="statistic">1223344</p>
+      </div>
     </div>
-    <div class="counter-container">
-      <div class="counter-label">Total Transactions Across Ecosystem</div>
-      <p class="statistic">1000</p>
-    </div>
-    <div class="counter-container">
-      <div class="counter-label">Total Burned pDAI 🔥</div>
-      <p class="statistic">1223344</p>
-    </div>
-  </div>
 
-  <!-- Fire Canvas for the Animation -->
-  <div id="fireCanvas"></div>
-
+    <div id="fireCanvas"></div>
+    
+  </section>
   <!-- Fire Animation Script -->
   <script>
     const firePixelsArray = [];
@@ -207,8 +188,6 @@
 
     start();
   </script>
-
-  <!-- Counter Animation Script -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.8.5/countUp.min.js'></script>
   <script>
@@ -220,6 +199,7 @@
       statisticAnimation.start();
     });
   </script>
+  <script src="js/navbar.js"></script>
 
 </body>
 

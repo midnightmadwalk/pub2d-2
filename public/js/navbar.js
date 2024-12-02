@@ -6,7 +6,9 @@ const body_before = `
                     <li><a href="lore.html">A1A ECOSYSTEM INDEX</a></li>
                     <li><a href="tools.html">TOOLS</a></li>
                     <li>
-                        <img src="aia-eco.jpg" class="logo" />
+                        <a href="/">
+                            <img src="aia-eco.jpg" class="logo" />
+                        </a>
                     </li>
                     <li><a href="contact.html">SOCIALS</a></li>
                     <li><a href="stats.html">STATS</a></li>

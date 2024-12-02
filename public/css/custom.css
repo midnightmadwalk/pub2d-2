@@ -25,11 +25,6 @@
 	background-image: url('../canba.png') !important;
 }
 
-/* .page-6 {
-	background-image: url('../collage_2.png') !important;
-}
- */
-
 
 @import url("https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap");
 * {
@@ -51,7 +46,6 @@ body {
 }
 
 .menu {
-	position: fixed;
 	min-height: 70px;
 	min-width: 100%;
 	background-color: rgba(0, 0, 0, 1);
@@ -75,6 +69,7 @@ body {
 }
 .top-menu {
 	top: 0;
+	z-index: 10000;
 }
 .bottom-menu {
 	bottom: 0;
