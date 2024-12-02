@@ -49,3 +49,177 @@
 
     /* Reduce space between text and fire animation */
     #fireCanvas {
+      position: relative;
+      /* Moves the fire up */
+    }
+
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background-color: black;
+    }
+
+    table {
+      margin-top: 5px;
+      border-collapse: collapse;
+      /* border: 1px solid #000;  */
+    }
+
+    td {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #000;
+      text-align: center;
+      vertical-align: center;
+      font-family: monospace;
+      font-size: 16px;
+      position: relative;
+    }
+
+    .pixel-index {
+      font-size: 10px;
+      display: inline-block;
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      color: #999;
+    }
+
+    td.pixel {
+      width: 15px;
+      height: 15px;
+      border: 0;
+      border-radius: 50%;
+    }
+
+    .color {
+      width: 20px;
+      height: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Counter Section -->
+  <div class="counter-container-main">
+    <div class="counter-container">
+      <div class="counter-label">Total Tokens in Ecosystem</div>
+      <p class="statistic">500</p>
+    </div>
+    <div class="counter-container">
+      <div class="counter-label">Total Transactions Across Ecosystem</div>
+      <p class="statistic">1000</p>
+    </div>
+    <div class="counter-container">
+      <div class="counter-label">Total Burned pDAI 🔥</div>
+      <p class="statistic">1223344</p>
+    </div>
+  </div>
+
+  <!-- Fire Canvas for the Animation -->
+  <div id="fireCanvas"></div>
+
+  <!-- Fire Animation Script -->
+  <script>
+    const firePixelsArray = [];
+    const fireWidth = Math.floor(window.innerWidth / 15);
+    const fireHeight = Math.floor(window.innerHeight / 15);
+
+    const fireColorsPalette = [
+      { r: 7, g: 7, b: 7 }, { r: 41, g: 0, b: 73 }, { r: 42, g: 2, b: 76 },
+      { r: 47, g: 4, b: 81 }, { r: 57, g: 8, b: 96 }, { r: 62, g: 12, b: 102 },
+      { r: 63, g: 16, b: 102 }, { r: 67, g: 20, b: 107 }, { r: 71, g: 24, b: 112 },
+      { r: 77, g: 29, b: 119 }, { r: 86, g: 36, b: 129 }, { r: 98, g: 45, b: 145 },
+      { r: 107, g: 53, b: 155 }, { r: 120, g: 60, b: 173 }, { r: 131, g: 66, b: 187 },
+      { r: 133, g: 73, b: 185 }, { r: 132, g: 76, b: 180 }, { r: 140, g: 81, b: 192 },
+      { r: 146, g: 88, b: 197 }, { r: 155, g: 93, b: 209 }, { r: 161, g: 100, b: 214 },
+      { r: 165, g: 98, b: 224 }, { r: 173, g: 107, b: 230 }, { r: 182, g: 113, b: 243 },
+      { r: 190, g: 126, b: 247 }, { r: 197, g: 137, b: 250 }, { r: 203, g: 146, b: 252 },
+      { r: 204, g: 155, b: 248 }, { r: 210, g: 163, b: 250 }, { r: 212, g: 170, b: 248 },
+      { r: 217, g: 179, b: 250 }, { r: 219, g: 188, b: 247 }, { r: 227, g: 201, b: 250 },
+      { r: 234, g: 211, b: 255 }, { r: 232, g: 215, b: 248 }, { r: 233, g: 223, b: 243 },
+      { r: 240, g: 233, b: 247 }
+    ];
+
+    function start() {
+      createFireDataStructure();
+      createFireSource();
+      renderFire();
+      setInterval(calculateFirePropagation, 50);
+    }
+
+    function createFireDataStructure() {
+      const numberOfPixels = fireWidth * fireHeight;
+      for (let i = 0; i < numberOfPixels; i++) {
+        firePixelsArray[i] = 0;
+      }
+    }
+
+    function calculateFirePropagation() {
+      for (let column = 0; column < fireWidth; column++) {
+        for (let row = 0; row < fireHeight; row++) {
+          const pixelIndex = column + fireWidth * row;
+          updateFireIntensityPerPixel(pixelIndex);
+        }
+      }
+      renderFire();
+    }
+
+    function updateFireIntensityPerPixel(currentPixelIndex) {
+      const belowPixelIndex = currentPixelIndex + fireWidth;
+      if (belowPixelIndex >= fireWidth * fireHeight) return;
+      const decay = Math.floor(Math.random() * 3);
+      const belowPixelFireIntensity = firePixelsArray[belowPixelIndex];
+      const newFireIntensity = belowPixelFireIntensity - decay >= 0 ? belowPixelFireIntensity - decay : 0;
+      firePixelsArray[currentPixelIndex - decay] = newFireIntensity;
+    }
+
+    function renderFire() {
+      let html = "<table cellpadding=0 cellspacing=0>";
+      for (let row = 0; row < fireHeight; row++) {
+        html += "<tr>";
+        for (let column = 0; column < fireWidth; column++) {
+          const pixelIndex = column + fireWidth * row;
+          const fireIntensity = firePixelsArray[pixelIndex];
+          const color = fireColorsPalette[fireIntensity];
+          const colorString = `${color.r},${color.g},${color.b}`;
+          html += `<td class="pixel" style="background-color: rgb(${colorString})"></td>`;
+        }
+        html += "</tr>";
+      }
+      html += "</table>";
+      document.querySelector("#fireCanvas").innerHTML = html;
+    }
+
+    function createFireSource() {
+      for (let column = 0; column <= fireWidth; column++) {
+        const overflowPixelIndex = fireWidth * fireHeight;
+        const pixelIndex = overflowPixelIndex - fireWidth + column;
+        firePixelsArray[pixelIndex] = 20;
+      }
+    }
+
+    start();
+  </script>
+
+  <!-- Counter Animation Script -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.8.5/countUp.min.js'></script>
+  <script>
+    var options = { useEasing: true, useGrouping: true, separator: ",", decimal: "." };
+    var statistics = $(".statistic");
+    statistics.each(function (index) {
+      var value = $(statistics[index]).html();
+      var statisticAnimation = new CountUp(statistics[index], 0, value, 0, 5, options);
+      statisticAnimation.start();
+    });
+  </script>
+
+</body>
+
+</html>
